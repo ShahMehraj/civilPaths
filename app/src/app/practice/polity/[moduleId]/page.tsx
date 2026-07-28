@@ -5,6 +5,13 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 
+export function generateStaticParams() {
+  return [
+    { moduleId: "all" },
+    ...polityCurriculum.map((m) => ({ moduleId: m.id })),
+  ];
+}
+
 interface Props {
   params: Promise<{ moduleId: string }>;
 }

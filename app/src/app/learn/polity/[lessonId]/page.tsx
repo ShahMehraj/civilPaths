@@ -1,6 +1,10 @@
-import { getLessonByModuleId } from "@/data/polity";
+import { getLessonByModuleId, allPolityLessons } from "@/data/polity";
 import { LessonReader } from "@/components/lesson/LessonReader";
 import { notFound } from "next/navigation";
+
+export function generateStaticParams() {
+  return allPolityLessons.map((lesson) => ({ lessonId: lesson.moduleId }));
+}
 
 interface Props {
   params: Promise<{ lessonId: string }>;
