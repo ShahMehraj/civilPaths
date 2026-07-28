@@ -4,7 +4,7 @@ import { Lesson, Question } from "@/types";
 import { lesson as lesson01, questions as questions01 } from "./01-making-of-constitution";
 import { lesson as lesson02, questions as questions02 } from "./02-preamble";
 import { lesson as lesson03, questions as questions03 } from "./03-salient-features";
-import { pilotLesson as lesson04, pilotQuestions as questions04 } from "../pilot-lesson";
+import { lesson as lesson04, questions as questions04 } from "./04-sources-of-constitution";
 import { lesson as lesson05, questions as questions05 } from "./05-schedules";
 import { lesson as lesson06, questions as questions06 } from "./06-union-territory";
 import { lesson as lesson07, questions as questions07 } from "./07-citizenship";
@@ -12,8 +12,8 @@ import { lesson as lesson08, questions as questions08 } from "./08-fundamental-r
 import { lesson as lesson09, questions as questions09 } from "./09-directive-principles";
 import { lesson as lesson10, questions as questions10 } from "./10-fundamental-duties";
 import { lesson as lesson11, questions as questions11 } from "./11-amendment";
+import { lesson as lesson12, questions as questions12 } from "./12-basic-structure";
 import {
-  lesson12, questions12,
   lesson13, questions13,
   lesson14, questions14,
   lesson15, questions15,
