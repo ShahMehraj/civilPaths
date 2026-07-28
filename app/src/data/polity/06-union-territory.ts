@@ -1,0 +1,52 @@
+import { Lesson, Question } from "@/types";
+
+export const lesson: Lesson = {
+  id: "union-territory-01", moduleId: "union-and-territory", title: "Union and its Territory", order: 6,
+  estimatedMinutes: 20, mastery: "not-started", completed: false,
+  sourceFiles: ["78224814_Union_and_its_Territory.pdf"], sourcePages: [1, 2, 3, 4],
+  blocks: [
+    { id: "hook-06", type: "hook", content: "India is described as a 'Union of States' — not a 'Federation of States'. This choice of words was deliberate. States cannot secede, and their boundaries can be altered by Parliament. How does India define its territory?" },
+    { id: "summary-06", type: "one-line-summary", content: "Articles 1-4 define India as a 'Union of States', describe its territory (states, UTs, acquired territories), and give Parliament the power to alter state boundaries without consent of the affected state." },
+    { id: "remember-06", type: "remember", points: [
+      "Article 1: India, that is Bharat, shall be a Union of States",
+      "Territory of India = States + UTs + territories acquired by India",
+      "Article 2: Parliament can admit or establish new states",
+      "Article 3: Parliament can alter boundaries, names of states",
+      "Article 3 requires President's recommendation + views of state legislature (not consent)",
+      "State legislature's views are not binding on Parliament",
+      "India is indestructible union of destructible states",
+      "'Union of States' (not federation) — states have no right to secede",
+      "Currently 28 States and 8 Union Territories",
+    ]},
+    { id: "source-ref-06", type: "source-reference", sourceFile: "78224814_Union_and_its_Territory.pdf", sourcePages: [1, 2, 3, 4] },
+  ],
+};
+
+export const questions: Question[] = [
+  { id: "q-union-01", subject: "polity", lessonIds: ["union-territory-01"], type: "single-correct",
+    prompt: "Article 1 of the Constitution describes India as:", options: ["A Federation of States", "A Union of States", "A Confederation", "A Unitary State"],
+    correctOptionIds: [1], explanation: "Article 1 states: 'India, that is Bharat, shall be a Union of States.' The term 'Union' was deliberately chosen to indicate that the federation is not a result of an agreement between states and states have no right to secede.", optionExplanations: { "0": "The word 'federation' is not used.", "1": "Correct. 'Union of States' is the exact phrase.", "2": "Confederation implies loose alliance — not the case.", "3": "India is not described as unitary." },
+    difficulty: "easy", skill: "recall", upscTrack: "prelims", sourceFiles: ["78224814_Union_and_its_Territory.pdf"], sourcePages: [1], tags: ["union", "article-1"] },
+  { id: "q-union-02", subject: "polity", lessonIds: ["union-territory-01"], type: "single-correct",
+    prompt: "Under which Article can Parliament form new states by separating territory from existing states?", options: ["Article 1", "Article 2", "Article 3", "Article 4"],
+    correctOptionIds: [2], explanation: "Article 3 empowers Parliament to form new states by separation of territory from existing states, merge states, or alter boundaries/names. Article 2 deals with admission or establishment of new states that are NOT already part of India.", optionExplanations: { "0": "Article 1 merely defines India.", "1": "Article 2 deals with admission of new states (not already part of India).", "2": "Correct. Article 3 deals with formation of new states from existing territory.", "3": "Article 4 is consequential — deals with amendments to 1st and 4th Schedules." },
+    difficulty: "medium", skill: "understanding", upscTrack: "prelims", sourceFiles: ["78224814_Union_and_its_Territory.pdf"], sourcePages: [2], tags: ["union", "article-3"] },
+  { id: "q-union-03", subject: "polity", lessonIds: ["union-territory-01"], type: "single-correct",
+    prompt: "A bill under Article 3 to alter the boundary of a state can be introduced in Parliament:", options: ["Only with the consent of the affected state legislature", "Only on the recommendation of the President", "By any member of Parliament without restriction", "Only in the Rajya Sabha"],
+    correctOptionIds: [1], explanation: "A bill under Article 3 can be introduced in Parliament only on the recommendation of the President. The President refers it to the state legislature for its views, but those views are not binding on Parliament.", optionExplanations: { "0": "Consent of state is NOT required — only views, which are non-binding.", "1": "Correct. President's recommendation is mandatory.", "2": "It can only be introduced with President's recommendation.", "3": "It can be introduced in either house." },
+    difficulty: "medium", skill: "understanding", upscTrack: "prelims", sourceFiles: ["78224814_Union_and_its_Territory.pdf"], sourcePages: [2, 3], tags: ["union", "article-3", "president"] },
+  { id: "q-union-04", subject: "polity", lessonIds: ["union-territory-01"], type: "multiple-statements",
+    prompt: "Consider the following statements:\n1. The territory of India comprises states, UTs, and any territory acquired by India.\n2. Consent of the state legislature is necessary for altering state boundaries.\n3. States in India have the right to secede.\n4. Article 2 deals with admission of new states.\n\nWhich are correct?",
+    statements: ["Territory = states + UTs + acquired", "Consent of state needed", "Right to secede exists", "Article 2 = admission of new states"],
+    options: ["1 and 4 only", "1, 2 and 4 only", "1 and 3 only", "2 and 3 only"],
+    correctOptionIds: [0], explanation: "Statement 1 is correct (Article 1). Statement 4 is correct. Statement 2 is wrong — only 'views' are sought, not consent. Statement 3 is wrong — no right to secede exists.", optionExplanations: { "0": "Correct. Only 1 and 4 are accurate.", "1": "Statement 2 is wrong — consent not required, only views.", "2": "Statement 3 is wrong — no secession right.", "3": "Both 2 and 3 are wrong." },
+    difficulty: "medium", skill: "elimination", upscTrack: "prelims", sourceFiles: ["78224814_Union_and_its_Territory.pdf"], sourcePages: [1, 2, 3], tags: ["union", "territory", "statements"] },
+  { id: "q-union-05", subject: "polity", lessonIds: ["union-territory-01"], type: "single-correct",
+    prompt: "The term 'Union of States' signifies that:", options: ["States can secede at will", "The federation is indestructible and states have no right to secede", "States created the Union by agreement", "Parliament cannot alter state boundaries"],
+    correctOptionIds: [1], explanation: "Dr. Ambedkar explained that the use of 'Union' instead of 'Federation' signifies that the Indian federation is not a result of an agreement and no state can secede from it — it is an indestructible union.", optionExplanations: { "0": "Exactly the opposite — no secession right.", "1": "Correct. Indestructible union, no secession.", "2": "The Union was not created by state agreement.", "3": "Parliament CAN alter boundaries under Article 3." },
+    difficulty: "easy", skill: "understanding", upscTrack: "prelims", sourceFiles: ["78224814_Union_and_its_Territory.pdf"], sourcePages: [1], tags: ["union", "no-secession"] },
+  { id: "q-union-06", subject: "polity", lessonIds: ["union-territory-01"], type: "single-correct",
+    prompt: "How many States and Union Territories does India currently have?", options: ["29 States and 7 UTs", "28 States and 8 UTs", "28 States and 9 UTs", "30 States and 6 UTs"],
+    correctOptionIds: [1], explanation: "As of the latest reorganization (Jammu & Kashmir Reorganisation Act, 2019), India has 28 States and 8 Union Territories.", optionExplanations: { "0": "This was before 2019.", "1": "Correct. 28 States and 8 UTs.", "2": "Incorrect.", "3": "Incorrect." },
+    difficulty: "easy", skill: "recall", upscTrack: "prelims", sourceFiles: ["78224814_Union_and_its_Territory.pdf"], sourcePages: [1], tags: ["union", "states-uts-count"] },
+];

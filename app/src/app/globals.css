@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #07182f;
+  --color-navy-900: #0b2342;
+  --color-navy-800: #16345c;
+  --color-navy-700: #1e4a7a;
+  --color-navy-600: #2a5f94;
+  --color-navy-100: #e8f0fa;
+  --color-navy-50: #f3f7fc;
+
+  --color-orange-600: #f97316;
+  --color-orange-500: #ff8a1f;
+  --color-orange-400: #ffab54;
+  --color-orange-100: #fff1e6;
+  --color-orange-50: #fff8f0;
+
+  --color-surface: #ffffff;
+  --color-surface-warm: #fffaf3;
+  --color-background: #f7f8fa;
+  --color-border: #e4e7ec;
+  --color-border-strong: #d0d5dd;
+
+  --color-text-primary: #12213a;
+  --color-text-secondary: #667085;
+  --color-text-muted: #98a2b3;
+
+  --color-success: #21a65b;
+  --color-success-light: #ecfdf3;
+  --color-warning: #f5b942;
+  --color-warning-light: #fffaeb;
+  --color-error: #d64545;
+  --color-error-light: #fef3f2;
+  --color-info: #3b82f6;
+  --color-info-light: #eff6ff;
+
+  --font-heading: "Playfair Display", "Source Serif 4", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .reading-width {
+    max-width: 720px;
+  }
+}
