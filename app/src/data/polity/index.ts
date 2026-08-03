@@ -13,30 +13,26 @@ import { lesson as lesson09, questions as questions09 } from "./09-directive-pri
 import { lesson as lesson10, questions as questions10 } from "./10-fundamental-duties";
 import { lesson as lesson11, questions as questions11 } from "./11-amendment";
 import { lesson as lesson12, questions as questions12 } from "./12-basic-structure";
-import {
-  lesson13, questions13,
-  lesson14, questions14,
-  lesson15, questions15,
-  lesson16, questions16,
-  lesson17, questions17,
-  lesson18, questions18,
-  lesson19, questions19,
-  lesson20, questions20,
-} from "./12-to-20";
-import {
-  lesson21, questions21,
-  lesson22, questions22,
-  lesson23, questions23,
-  lesson24, questions24,
-  lesson25, questions25,
-  lesson26, questions26,
-  lesson27, questions27,
-  lesson28, questions28,
-  lesson29, questions29,
-  lesson30, questions30,
-  lesson31, questions31,
-  lesson32, questions32,
-} from "./21-to-32";
+import { lesson as lesson13, questions as questions13 } from "./13-system-of-government";
+import { lesson as lesson14, questions as questions14 } from "./14-union-executive";
+import { lesson as lesson15, questions as questions15 } from "./15-parliament";
+import { lesson as lesson16, questions as questions16 } from "./16-state-executive";
+import { lesson as lesson17, questions as questions17 } from "./17-state-legislature";
+import { lesson as lesson18, questions as questions18 } from "./18-judiciary";
+import { lesson as lesson19, questions as questions19 } from "./19-local-self-government";
+import { lesson as lesson20, questions as questions20 } from "./20-uts-scheduled-areas";
+import { lesson as lesson21, questions as questions21 } from "./21-elections";
+import { lesson as lesson22, questions as questions22 } from "./22-constitutional-bodies";
+import { lesson as lesson23, questions as questions23 } from "./23-non-constitutional-bodies";
+import { lesson as lesson24, questions as questions24 } from "./24-special-provisions";
+import { lesson as lesson25, questions as questions25 } from "./25-official-languages";
+import { lesson as lesson26, questions as questions26 } from "./26-cooperative-sector";
+import { lesson as lesson27, questions as questions27 } from "./27-governance";
+import { lesson as lesson28, questions as questions28 } from "./28-nhrc";
+import { lesson as lesson29, questions as questions29 } from "./29-ncm";
+import { lesson as lesson30, questions as questions30 } from "./30-ncpcr";
+import { lesson as lesson31, questions as questions31 } from "./31-ncw";
+import { lesson as lesson32, questions as questions32 } from "./32-key-judgements";
 import {
   extraSchedules,
   extraUnion,

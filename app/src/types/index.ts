@@ -245,6 +245,52 @@ export interface LearnerProgress {
   masteryDistribution: Record<MasteryLevel, number>;
 }
 
+// ─── Theory references ──────────────────────────────────────────────
+
+/** A contiguous run of Articles that one chapter explains. */
+export interface ArticleRange {
+  from: number;
+  to: number;
+  /** Restricts the range to lettered Articles, e.g. "A" for Art 300A. */
+  suffix?: string;
+  moduleId: string;
+  /** What the target chapter says about this range, shown on the link. */
+  topic: string;
+}
+
+/** A named case, statute, body or doctrine that one chapter explains. */
+export interface NamedReference {
+  label: string;
+  /** Lowercased substrings; any hit links to this reference. */
+  match: string[];
+  moduleId: string;
+  topic: string;
+}
+
+/** A resolved link ready to render. */
+export interface TheoryLink {
+  label: string;
+  topic: string;
+  moduleId: string;
+  href: string;
+  /**
+   * Human-readable name of the section the href points at, e.g. "The Speaker".
+   * Absent when the link could only be resolved to the chapter as a whole.
+   */
+  sectionTitle?: string;
+  /** Terms used to locate this entity inside the target chapter. */
+  searchTerms: string[];
+}
+
+/** One addressable section of a chapter: a block, or a heading within one. */
+export interface LessonSection {
+  /** DOM id, also the URL fragment. */
+  anchor: string;
+  title: string;
+  /** Text searched to decide whether a section covers an entity. */
+  text: string;
+}
+
 // ─── Notes & Bookmarks ──────────────────────────────────────────────
 
 export interface Bookmark {

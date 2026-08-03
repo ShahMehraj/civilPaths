@@ -66,3 +66,35 @@
     max-width: 720px;
   }
 }
+
+/*
+ * Arriving from a quiz deep link, briefly tint the section that was linked to,
+ * so a reader landing mid-chapter can see which paragraph answers their
+ * question. Fades out rather than persisting, to avoid a permanent highlight.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .deep-link-target:target {
+    animation: deep-link-flash 2.6s ease-out 1;
+    border-radius: var(--radius-md);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deep-link-target:target {
+    background-color: var(--color-orange-50);
+    border-radius: var(--radius-md);
+    box-shadow: 0 0 0 3px var(--color-orange-100);
+  }
+}
+
+@keyframes deep-link-flash {
+  0%,
+  55% {
+    background-color: var(--color-orange-100);
+    box-shadow: 0 0 0 6px var(--color-orange-100);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 0 6px transparent;
+  }
+}

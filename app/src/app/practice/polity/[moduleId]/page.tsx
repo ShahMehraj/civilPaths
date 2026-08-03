@@ -42,8 +42,8 @@ export default async function ChapterQuizPage({ params }: Props) {
     );
   }
 
-  const module = polityCurriculum.find((m) => m.id === moduleId);
-  if (!module) notFound();
+  const curriculumModule = polityCurriculum.find((m) => m.id === moduleId);
+  if (!curriculumModule) notFound();
 
   const questions = getQuestionsForModule(moduleId);
   if (questions.length === 0) notFound();
@@ -60,7 +60,7 @@ export default async function ChapterQuizPage({ params }: Props) {
         <div>
           <p className="text-xs text-orange-600 font-medium">Indian Polity</p>
           <h1 className="text-xl font-bold text-text-primary">
-            {module.title} ({questions.length} questions)
+            {curriculumModule.title} ({questions.length} questions)
           </h1>
         </div>
       </div>

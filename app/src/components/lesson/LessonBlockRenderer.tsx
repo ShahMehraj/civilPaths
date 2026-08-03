@@ -13,13 +13,31 @@ import {
   Crosshair,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import {
+  headingAnchor,
+  prettifyHeading,
+  splitIntoHeadedSections,
+} from "@/lib/lesson-sections";
 
 interface Props {
   block: LessonBlock;
   onComplete: () => void;
 }
 
+/**
+ * Wraps every block in an anchor target so quiz explanations can deep-link to
+ * it. `scroll-mt-24` clears the sticky chapter header, which would otherwise
+ * cover the heading a reader was sent to.
+ */
 export function LessonBlockRenderer({ block, onComplete }: Props) {
+  return (
+    <div id={block.id} className="deep-link-target scroll-mt-24">
+      {renderBlock(block, onComplete)}
+    </div>
+  );
+}
+
+function renderBlock(block: LessonBlock, onComplete: () => void) {
   switch (block.type) {
     case "hook":
       return (
@@ -48,7 +66,12 @@ export function LessonBlockRenderer({ block, onComplete }: Props) {
         </section>
       );
 
-    case "explanation":
+    case "explanation": {
+      // Long explanations carry ALL-CAPS headings; render each as its own
+      // anchored sub-section so quiz links can land on the right paragraph
+      // instead of the top of a very long block.
+      const { lead, sections } = splitIntoHeadedSections(block.content);
+
       return (
         <section className="space-y-2" onMouseEnter={onComplete}>
           <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted flex items-center gap-2">
@@ -57,11 +80,33 @@ export function LessonBlockRenderer({ block, onComplete }: Props) {
               ? "Simple Explanation"
               : "UPSC-Level Explanation"}
           </h3>
-          <p className="text-base text-text-primary leading-[1.75]">
-            {block.content}
-          </p>
+
+          {/* Prose before the first heading — the whole block when unsectioned. */}
+          {lead && (
+            <p className="text-base text-text-primary leading-[1.75]">{lead}</p>
+          )}
+
+          {sections.length > 0 && (
+            <div className="space-y-5">
+              {sections.map(({ heading, body }) => (
+                <div
+                  key={heading}
+                  id={headingAnchor(block.id, heading)}
+                  className="deep-link-target space-y-1.5 scroll-mt-24"
+                >
+                  <h4 className="text-sm font-bold text-navy-900">
+                    {prettifyHeading(heading)}
+                  </h4>
+                  <p className="text-base text-text-primary leading-[1.75]">
+                    {body.trim()}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       );
+    }
 
     case "definition":
       return (

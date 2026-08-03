@@ -1,14 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import Link from "next/link";
 import { Question, Confidence } from "@/types";
 import { cn } from "@/lib/utils";
+import { mergeTheoryLinks } from "@/lib/theory-links";
+import { getLessonById } from "@/data/polity";
+import { TheoryLinks } from "./TheoryLinks";
 import {
   CheckCircle2,
   XCircle,
   ChevronRight,
   RotateCcw,
   Award,
+  BookOpen,
+  ExternalLink,
 } from "lucide-react";
 
 interface Props {
@@ -29,6 +35,41 @@ export function QuizEngine({ questions, mode }: Props) {
     showResult &&
     selectedOptions.length === question.correctOptionIds.length &&
     selectedOptions.every((id) => question.correctOptionIds.includes(id));
+
+  /**
+   * The chapter this question was written for. Used both as the "read the full
+   * chapter" target and to suppress self-links: a learner practising the
+   * Parliament chapter gains nothing from a link back to it.
+   */
+  const sourceLesson = useMemo(
+    () => getLessonById(question.lessonIds[0]),
+    [question]
+  );
+  const homeModuleId = sourceLesson?.moduleId;
+
+  /** Per-option links, so option A's references sit beside option A. */
+  const optionLinks = useMemo(
+    () =>
+      question.options.map((option, i) =>
+        mergeTheoryLinks(
+          [option, question.optionExplanations[String(i)]],
+          homeModuleId
+        )
+      ),
+    [question, homeModuleId]
+  );
+
+  /**
+   * Links from the prompt and main explanation, minus anything already shown
+   * against an individual option — no point repeating Article 30 twice.
+   */
+  const generalLinks = useMemo(() => {
+    const shown = new Set(optionLinks.flat().map((l) => l.label));
+    return mergeTheoryLinks(
+      [question.prompt, question.explanation, ...(question.statements ?? [])],
+      homeModuleId
+    ).filter((l) => !shown.has(l.label));
+  }, [question, homeModuleId, optionLinks]);
 
   function handleOptionSelect(optionIndex: number) {
     if (showResult) return;
@@ -275,23 +316,76 @@ export function QuizEngine({ questions, mode }: Props) {
             {question.explanation}
           </p>
 
-          {/* Option-wise explanations */}
-          {!isCorrect && (
-            <div className="mt-3 space-y-2">
-              <p className="text-xs font-semibold text-text-muted uppercase tracking-wide">
-                Option Analysis
-              </p>
-              {Object.entries(question.optionExplanations).map(
-                ([key, explanation]) => (
-                  <div key={key} className="text-xs text-text-secondary">
-                    <span className="font-medium">
-                      {String.fromCharCode(65 + Number(key))}:
+          {/* Option analysis, each option carrying links to the theory it rests on */}
+          <div className="mt-3 space-y-2.5">
+            <p className="text-xs font-semibold text-text-muted uppercase tracking-wide">
+              Option Analysis
+            </p>
+            {question.options.map((option, index) => {
+              const explanation = question.optionExplanations[String(index)];
+              if (!explanation) return null;
+
+              const isCorrectOption =
+                question.correctOptionIds.includes(index);
+              const wasSelected = selectedOptions.includes(index);
+
+              return (
+                <div
+                  key={index}
+                  className={cn(
+                    "text-xs rounded-md px-2.5 py-2 border",
+                    isCorrectOption
+                      ? "border-success/30 bg-success-light/60"
+                      : wasSelected
+                        ? "border-error/30 bg-error-light/60"
+                        : "border-transparent"
+                  )}
+                >
+                  <div className="text-text-secondary">
+                    <span
+                      className={cn(
+                        "font-semibold",
+                        isCorrectOption
+                          ? "text-success"
+                          : wasSelected
+                            ? "text-error"
+                            : "text-text-primary"
+                      )}
+                    >
+                      {String.fromCharCode(65 + index)}:
                     </span>{" "}
                     {explanation}
+                    {wasSelected && (
+                      <span className="ml-1 text-[10px] text-text-muted">
+                        (your answer)
+                      </span>
+                    )}
                   </div>
-                )
-              )}
-            </div>
+                  <TheoryLinks links={optionLinks[index]} className="mt-1.5" />
+                </div>
+              );
+            })}
+          </div>
+
+          {/* References the prompt or main explanation raised */}
+          <TheoryLinks
+            links={generalLinks}
+            heading="Related Theory"
+            className="mt-3 pt-3 border-t border-border/60"
+          />
+
+          {/* Straight route back to the chapter this question came from */}
+          {sourceLesson && (
+            <Link
+              href={`/learn/polity/${sourceLesson.moduleId}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium text-navy-800 hover:text-orange-600 transition-colors"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              Read the full chapter: {sourceLesson.title}
+              <ExternalLink className="w-3 h-3 opacity-60" aria-hidden="true" />
+            </Link>
           )}
         </div>
       )}

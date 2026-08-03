@@ -7,7 +7,7 @@ export const subjects: Subject[] = [
     description:
       "Understand the Constitution, institutions, governance and political processes.",
     icon: "⚖️",
-    moduleCount: 35,
+    moduleCount: 32,
     active: true,
     progress: 0,
   },
